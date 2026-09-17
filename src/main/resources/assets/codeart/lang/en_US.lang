@@ -1,0 +1,43 @@
+itemGroup.codeart=Art
+
+item.codeart.art_canvas.name=Art Canvas
+tile.codeart.art_canvas.name=Art Canvas
+tile.codeart.art_frame.name=Art Canvas Section
+
+codeart.tooltip.size=Canvas: %s x %s blocks
+
+codeart.command.usage=/art <list|info|add|remove|reload|give>
+codeart.command.usage.list=/art list [page]
+codeart.command.usage.info=/art info <name>
+codeart.command.usage.add=/art add <name> <width> <height> <local://file|http(s)://url>
+codeart.command.usage.remove=/art remove <name>
+codeart.command.usage.give=/art give <player> <name> [count]
+
+codeart.message.off=The art store is off: the storage provider named in the main config is not registered. Tell the administrator
+codeart.message.empty=No art is registered yet
+codeart.message.list.header=Art %s/%s (%s total)
+codeart.message.list.row=%s: %sx%s blocks, %sx%s px, %s frame(s)
+codeart.message.list.row_failed=%s is unavailable: %s
+codeart.message.info.header=Art %s
+codeart.message.info.source=source: %s
+codeart.message.info.canvas=canvas: %sx%s blocks
+codeart.message.info.failed=unavailable: %s
+codeart.message.info.image=image: %sx%s %s, %s bytes, %s frame(s)
+codeart.message.info.hash=sha256: %s
+codeart.message.info.direct_on=direct client download: enabled
+codeart.message.info.direct_off=direct client download: disabled
+codeart.message.resolving=Resolving '%s'...
+codeart.message.place_denied=You cannot build here
+codeart.message.no_space=Not enough free space for a %s x %s canvas
+codeart.message.reload.done=Loaded %s art definition(s), %s unavailable
+codeart.message.reload.failed=Cannot read the art registry: %s
+codeart.message.add.done=Added art '%s' (%sx%s px, %s frame(s))
+codeart.message.add.failed=Cannot add '%s': %s
+codeart.message.exists=Art '%s' already exists
+codeart.message.remove.done=Removed art '%s'
+codeart.message.unknown=Unknown art: %s
+codeart.message.invalid_name=Invalid art name: %s
+codeart.message.canvas_too_big=Canvas %sx%s exceeds the configured maximum of %sx%s
+codeart.message.give.done=Gave %sx '%s' to %s
+codeart.message.give.failed=Could not fit the art canvas into that inventory
+codeart.message.player_offline=Player %s is not online

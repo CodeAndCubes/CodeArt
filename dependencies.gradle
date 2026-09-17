@@ -1,0 +1,31 @@
+dependencies {
+    compileOnly 'com.mrleonardos.codecore:CodeCore:1.1.0:api'
+    compileOnly 'com.mrleonardos.codecore:CodeCore:1.1.0:platform'
+    runtimeOnly 'com.mrleonardos.codecore:CodeCore:1.1.0:dev'
+    compileOnly 'com.mrleonardos:codesides:1.1.0'
+    testImplementation 'com.mrleonardos:codesides:1.1.0'
+
+    testCompileOnly 'com.mrleonardos.codecore:CodeCore:1.1.0:api'
+    testCompileOnly 'com.mrleonardos.codecore:CodeCore:1.1.0:platform'
+    testRuntimeOnly 'com.mrleonardos.codecore:CodeCore:1.1.0:dev'
+
+    testImplementation platform('org.junit:junit-bom:5.10.2')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.ow2.asm:asm-debug-all:5.0.3'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+
+    // Прогон тестов на другой Java: `./gradlew test -PtestJdk=8`. Байткод у мода всегда восьмой, а вот
+    // ведёт себя он на разных версиях по-разному: серверы 1.7.10 живут и на 8, и на 21 под lwjgl3ify.
+    if (project.hasProperty('testJdk')) {
+        javaLauncher = javaToolchains.launcherFor {
+            languageVersion = JavaLanguageVersion.of(project.property('testJdk') as int)
+        }
+    }
+    testLogging {
+        events 'passed', 'failed', 'skipped'
+    }
+}

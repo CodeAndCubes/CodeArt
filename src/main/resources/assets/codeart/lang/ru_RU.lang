@@ -1,0 +1,43 @@
+itemGroup.codeart=Арт
+
+item.codeart.art_canvas.name=Арт-полотно
+tile.codeart.art_canvas.name=Арт-полотно
+tile.codeart.art_frame.name=Секция арт-полотна
+
+codeart.tooltip.size=Полотно: %s x %s блоков
+
+codeart.command.usage=/art <list|info|add|remove|reload|give>
+codeart.command.usage.list=/art list [страница]
+codeart.command.usage.info=/art info <имя>
+codeart.command.usage.add=/art add <имя> <ширина> <высота> <local://файл|http(s)://ссылка>
+codeart.command.usage.remove=/art remove <имя>
+codeart.command.usage.give=/art give <игрок> <имя> [количество]
+
+codeart.message.off=Арты выключены: провайдер хранилища из главного файла настроек не зарегистрирован. Скажите администратору
+codeart.message.empty=Ни один арт ещё не зарегистрирован
+codeart.message.list.header=Арты %s/%s (всего %s)
+codeart.message.list.row=%s: %sx%s блоков, %sx%s px, кадров %s
+codeart.message.list.row_failed=%s недоступен: %s
+codeart.message.info.header=Арт %s
+codeart.message.info.source=источник: %s
+codeart.message.info.canvas=полотно: %sx%s блоков
+codeart.message.info.failed=недоступен: %s
+codeart.message.info.image=картинка: %sx%s %s, %s байт, кадров %s
+codeart.message.info.hash=sha256: %s
+codeart.message.info.direct_on=прямая загрузка клиентом: включена
+codeart.message.info.direct_off=прямая загрузка клиентом: выключена
+codeart.message.resolving=Разбираю «%s»...
+codeart.message.place_denied=Здесь нельзя строить
+codeart.message.no_space=Недостаточно места для полотна %s x %s
+codeart.message.reload.done=Загружено артов: %s, недоступно: %s
+codeart.message.reload.failed=Реестр артов не читается: %s
+codeart.message.add.done=Арт «%s» добавлен (%sx%s px, кадров %s)
+codeart.message.add.failed=«%s» не добавляется: %s
+codeart.message.exists=Арт «%s» уже есть
+codeart.message.remove.done=Арт «%s» снят
+codeart.message.unknown=Неизвестный арт: %s
+codeart.message.invalid_name=Недопустимое имя арта: %s
+codeart.message.canvas_too_big=Полотно %sx%s больше настроенного потолка %sx%s
+codeart.message.give.done=Выдано %sx «%s» игроку %s
+codeart.message.give.failed=Арт-полотно не влезло в инвентарь
+codeart.message.player_offline=Игрок %s не в сети
