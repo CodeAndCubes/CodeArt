@@ -4,7 +4,6 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
@@ -19,6 +18,7 @@ public class TileEntityArtCanvasRenderer extends TileEntitySpecialRenderer {
 
     private static final float PLACEHOLDER_ALPHA = 0.35F;
     private static final double BAR_OFFSET = 0.0006D;
+    private static final int FULL_BRIGHTNESS = 0xF000F0;
 
     @Override
     public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTicks) {
@@ -76,9 +76,9 @@ public class TileEntityArtCanvasRenderer extends TileEntitySpecialRenderer {
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         tessellator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
+        tessellator.setBrightness(FULL_BRIGHTNESS);
         for (int row = 0; row < height; row++) {
             for (int column = 0; column < width; column++) {
-                tessellator.setBrightness(brightnessOf(canvas, normal, right, up, column, row));
                 double baseX = origin[0] + right.offsetX * column + up.offsetX * row;
                 double baseY = origin[1] + right.offsetY * column + up.offsetY * row;
                 double baseZ = origin[2] + right.offsetZ * column + up.offsetZ * row;
@@ -125,9 +125,9 @@ public class TileEntityArtCanvasRenderer extends TileEntitySpecialRenderer {
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         tessellator.setColorRGBA_F(red, green, blue, PLACEHOLDER_ALPHA);
+        tessellator.setBrightness(FULL_BRIGHTNESS);
         for (int row = 0; row < height; row++) {
             for (int column = 0; column < width; column++) {
-                tessellator.setBrightness(brightnessOf(canvas, normal, right, up, column, row));
                 double baseX = origin[0] + right.offsetX * column + up.offsetX * row;
                 double baseY = origin[1] + right.offsetY * column + up.offsetY * row;
                 double baseZ = origin[2] + right.offsetZ * column + up.offsetZ * row;
@@ -158,7 +158,7 @@ public class TileEntityArtCanvasRenderer extends TileEntitySpecialRenderer {
         double baseZ = origin[2] + normal.offsetZ * BAR_OFFSET;
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
-        tessellator.setBrightness(brightnessOf(canvas, normal, right, up, 0, 0));
+        tessellator.setBrightness(FULL_BRIGHTNESS);
         tessellator.setColorRGBA_F(0.85F, 0.85F, 0.95F, 0.85F);
         tessellator
             .addVertex(baseX + up.offsetX * thickness, baseY + up.offsetY * thickness, baseZ + up.offsetZ * thickness);
@@ -170,21 +170,6 @@ public class TileEntityArtCanvasRenderer extends TileEntitySpecialRenderer {
             .addVertex(baseX + right.offsetX * filled, baseY + right.offsetY * filled, baseZ + right.offsetZ * filled);
         tessellator.addVertex(baseX, baseY, baseZ);
         tessellator.draw();
-    }
-
-    private static int brightnessOf(TileEntityArtCanvas canvas, ForgeDirection normal, ForgeDirection right,
-        ForgeDirection up, int column, int row) {
-        World world = canvas.getWorldObj();
-        if (world == null) {
-            return 240;
-        }
-        int x = canvas.xCoord + right.offsetX * column + up.offsetX * row + normal.offsetX;
-        int y = canvas.yCoord + right.offsetY * column + up.offsetY * row + normal.offsetY;
-        int z = canvas.zCoord + right.offsetZ * column + up.offsetZ * row + normal.offsetZ;
-        if (y < 0 || y >= world.getHeight()) {
-            return 240;
-        }
-        return world.getLightBrightnessForSkyBlocks(x, y, z, 0);
     }
 
     private static float interpolate(float from, float to, int step, int steps) {
