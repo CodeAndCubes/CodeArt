@@ -7,6 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
 
 import com.mrleonardos.codeart.api.ArtDefinition;
 import com.mrleonardos.codeart.client.ArtImageStatus;
@@ -47,6 +48,10 @@ public class TileEntityArtCanvasRenderer extends TileEntitySpecialRenderer {
         GL11.glEnable(GL11.GL_ALPHA_TEST);
         GL11.glAlphaFunc(GL11.GL_GREATER, 0.004F);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GL11.glDisable(GL11.GL_LIGHTING);
+        OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL13.glActiveTexture(GL13.GL_TEXTURE0);
 
         if (texture != null) {
             renderArt(canvas, texture, origin, normal, right, up);
@@ -55,6 +60,10 @@ public class TileEntityArtCanvasRenderer extends TileEntitySpecialRenderer {
         }
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL13.glActiveTexture(GL13.GL_TEXTURE0);
+        GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glEnable(GL11.GL_CULL_FACE);
         GL11.glPopMatrix();
